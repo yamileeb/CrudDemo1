@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jym.car.mapper.JymCarSeriesMapper">
+
+    <resultMap id="BaseResultMap" type="com.jym.car.model.entity.JymCarSeries">
+        <!--@Table jym_car_series-->
+        <result property="seriesid" column="seriesId" jdbcType="OTHER"/>
+        <result property="brandid" column="brandId" jdbcType="INTEGER"/>
+        <result property="seriesname" column="seriesName" jdbcType="VARCHAR"/>
+        <result property="levelname" column="levelName" jdbcType="VARCHAR"/>
+        <result property="sgroup" column="sgroup" jdbcType="VARCHAR"/>
+        <result property="isuse" column="isUse" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="creater" column="creater" jdbcType="INTEGER"/>
+        <result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="updater" column="updater" jdbcType="INTEGER"/>
+        <result property="updatetime" column="updateTime" jdbcType="TIMESTAMP"/>
+        <result property="dflag" column="dflag" jdbcType="VARCHAR"/>
+        <result property="isnewenergy" column="isNewEnergy" jdbcType="INTEGER"/>
+        <result property="placename" column="placeName" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <update id="deleteByIds">
+        UPDATE jym_car_series series
+        LEFT JOIN jym_car_model model
+        ON series.seriesid = model.seriesid
+        SET series.dflag = 'delete',
+        model.dflag = 'delete'
+        WHERE
+        <if test="ids!= null and ids.size() >0">
+            series.seriesid IN
+            <foreach collection="ids" item="value" separator="," open="(" close=")">
+                #{value}
+            </foreach>
+        </if>
+    </update>
+
+</mapper>

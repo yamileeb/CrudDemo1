@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jym.car.mapper.JymCarModelMapper">
+
+    <resultMap id="BaseResultMap" type="com.jym.car.model.entity.JymCarModel">
+        <!--@Table jym_car_model-->
+        <result property="modelid" column="modelId" jdbcType="OTHER"/>
+        <result property="seriesid" column="seriesId" jdbcType="INTEGER"/>
+        <result property="modelname" column="modelName" jdbcType="VARCHAR"/>
+        <result property="guideprice" column="guidePrice" jdbcType="VARCHAR"/>
+        <result property="year" column="year" jdbcType="INTEGER"/>
+        <result property="configuration" column="configuration" jdbcType="VARCHAR"/>
+        <result property="isuse" column="isUse" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="creater" column="creater" jdbcType="INTEGER"/>
+        <result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="updater" column="updater" jdbcType="INTEGER"/>
+        <result property="updatetime" column="updateTime" jdbcType="TIMESTAMP"/>
+        <result property="dflag" column="dflag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="getModelsByBrandId" resultType="com.jym.car.model.entity.JymCarModel">
+        SELECT model.*
+        from jym_car_model model
+                 LEFT JOIN jym_car_series series ON model.seriesId = series.seriesId
+        WHERE series.brandid = #{brandId}
+          and model.dflag = 'auto'
+    </select>
+
+
+</mapper>

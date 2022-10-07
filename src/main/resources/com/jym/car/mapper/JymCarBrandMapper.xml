@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jym.car.mapper.JymCarBrandMapper">
+
+    <resultMap id="BaseResultMap" type="com.jym.car.model.entity.JymCarBrand">
+        <!--@Table jym_car_brand-->
+        <result property="brandid" column="brandId" jdbcType="OTHER"/>
+        <result property="brandname" column="brandName" jdbcType="VARCHAR"/>
+        <result property="firstletter" column="firstLetter" jdbcType="VARCHAR"/>
+        <result property="brandlogo" column="brandLogo" jdbcType="VARCHAR"/>
+        <result property="isuse" column="isUse" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="creater" column="creater" jdbcType="INTEGER"/>
+        <result property="createtime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="updater" column="updater" jdbcType="INTEGER"/>
+        <result property="updatetime" column="updateTime" jdbcType="TIMESTAMP"/>
+        <result property="dflag" column="dflag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <update id="removeBrandAndChild">
+        UPDATE jym_car_brand brand
+            LEFT JOIN jym_car_series series
+            ON brand.brandid = series.brandid
+            LEFT JOIN jym_car_model model ON series.seriesId = model.seriesId
+        SET series.dflag = 'delete',
+            brand.dflag  = 'delete',
+            model.dflag  = 'delete'
+        WHERE brand.brandid = #{brandid};
+    </update>
+
+</mapper>

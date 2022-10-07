@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jym.car.mapper.SysRoleMapper">
+    <select id="findRoleByUserId" resultType="java.lang.String">
+        SELECT
+            DISTINCT r.`name`
+        FROM
+            sys_user_role ur
+                LEFT JOIN `sys_role` r ON ur.`role_id` = r.`id`
+        WHERE
+            user_id = #{userid}
+          AND r.`status` = 1
+    </select>
+</mapper>
+
