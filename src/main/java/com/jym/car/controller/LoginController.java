@@ -22,7 +22,7 @@ public class LoginController {
 
     @GetMapping("/user/login")
     public Result login(){
-        return Result.ok("hello");
+        return Result.ok("nonono");
     }
 
     @PostMapping("/user/logout")
