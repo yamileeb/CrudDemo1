@@ -3,14 +3,21 @@ package com.jym.car.controller;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jym.car.annotation.MyLog;
+import com.jym.car.common.SysLogAspect;
 import com.jym.car.model.entity.JymCarBrand;
 import com.jym.car.model.entity.JymCarSeries;
 import com.jym.car.model.result.Result;
 import com.jym.car.service.JymCarBrandService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.annotation.Secured;
@@ -36,6 +43,8 @@ import java.util.Set;
 @RestController
 @RequestMapping("jymCarBrand")
 public class JymCarBrandController {
+
+    private static final Logger log = LogManager.getLogger(JymCarBrandController.class);
     /**
      * 服务对象
      */
@@ -54,6 +63,10 @@ public class JymCarBrandController {
         return Result.ok(this.jymCarBrandService.page(page, new QueryWrapper<>(jymCarBrand)));
     }
 
+
+   /* @Autowired
+    RocketMQTemplate template;*/
+
     /**
      * 根据品牌id查询品牌信息
      * @param id
@@ -64,6 +77,9 @@ public class JymCarBrandController {
     @PreAuthorize("hasAnyAuthority('admin','user')")
     public Result<JymCarBrand> getBrandById(@PathVariable("id") Integer id){
         JymCarBrand brand = jymCarBrandService.getBrandById(id);
+        /*SendResult sanyouTopic = template.syncSend("sanyouTopic", JSON.toJSONString(brand));
+        SendStatus sendStatus = sanyouTopic.getSendStatus();
+        log.info("sendStatus{}",sendStatus);*/
         return Result.ok(brand);
     }
 

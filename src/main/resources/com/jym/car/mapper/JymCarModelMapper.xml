@@ -27,6 +27,11 @@
         WHERE series.brandid = #{brandId}
           and model.dflag = 'auto'
     </select>
+    <select id="findByModelName" resultType="com.jym.car.model.entity.JymCarModel">
+        SELECT modelId
+        from jym_car_model
+        WHERE modelName like concat('%',#{modelName},'%')
+    </select>
 
 
 </mapper>

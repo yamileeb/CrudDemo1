@@ -24,16 +24,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions><!-- 去掉默认日志配置logback -->
+            <!--<exclusions>&lt;!&ndash; 去掉默认日志配置logback &ndash;&gt;
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
         </dependency>
 
         <!-- log4j -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>2.14.1</version>
@@ -42,7 +42,7 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.14.1</version>
-        </dependency>
+        </dependency>-->
 
 
         <!-- excel工具 -->
@@ -125,6 +125,20 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.0</version>
         </dependency>
+
+       <!-- <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>2.1.1</version>
+        </dependency>-->
+
+        <!--集成logstash-->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>5.3</version>
+        </dependency>
+
 
     </dependencies>
 

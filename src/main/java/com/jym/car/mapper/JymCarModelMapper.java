@@ -6,6 +6,8 @@ import com.jym.car.model.entity.JymCarModel;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * (JymCarModel)表数据库访问层
  *
@@ -18,4 +20,5 @@ public interface JymCarModelMapper extends BaseMapper<JymCarModel> {
 
     Page<JymCarModel> getModelsByBrandId(Page<JymCarModel> page,@Param("brandId") Integer brandId);
 
+    List<JymCarModel> findByModelName(@Param("modelName") String s);
 }
